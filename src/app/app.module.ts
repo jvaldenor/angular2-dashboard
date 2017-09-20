@@ -1,28 +1,37 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
-
+import {AppComponent} from './app.component';
 // Import containers
-import {
-  FullLayout,
-  SimpleLayout
-} from './containers';
+import {FullLayout, SimpleLayout} from './containers';
+// Import components
+import {AppAside, AppBreadcrumbs, AppFooter, AppHeader, AppSidebar} from './components';
+// Import directives
+import {AsideToggleDirective, NAV_DROPDOWN_DIRECTIVES, SIDEBAR_TOGGLE_DIRECTIVES} from './directives';
+// Import routing module
+import {AppRoutingModule} from './app.routing';
+// Import 3rd party components
+import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
+import {TabsModule} from 'ngx-bootstrap/tabs';
+import {ChartsModule} from 'ng2-charts/ng2-charts';
+import {AuthGuard} from '../accounts/_guards/auth.guard';
+import {AlertService} from '../accounts/_services/alert.service';
+import {AuthenticationService} from '../accounts/_services/authentication.service';
+import {UserService} from '../accounts/_services/user.service';
+import {HttpModule} from '@angular/http';
+import {FormsModule} from '@angular/forms';
+import {LoginComponent} from '../accounts/login/login.component';
+import {RegisterComponent} from '../accounts/register/register.component';
+import {AccountsComponent} from '../accounts/accounts.component';
+import {AlertComponent} from '../accounts/_directives/alert.component';
+import {UserComponent} from "../accounts/user/user.component";
+import {HashLocationStrategy, LocationStrategy} from "@angular/common";
 
 const APP_CONTAINERS = [
   FullLayout,
   SimpleLayout
 ]
 
-// Import components
-import {
-  AppAside,
-  AppBreadcrumbs,
-  AppFooter,
-  AppHeader,
-  AppSidebar
-} from './components';
 
 const APP_COMPONENTS = [
   AppAside,
@@ -32,12 +41,6 @@ const APP_COMPONENTS = [
   AppSidebar
 ]
 
-// Import directives
-import {
-  AsideToggleDirective,
-  NAV_DROPDOWN_DIRECTIVES,
-  SIDEBAR_TOGGLE_DIRECTIVES
-} from './directives';
 
 const APP_DIRECTIVES = [
   AsideToggleDirective,
@@ -45,17 +48,12 @@ const APP_DIRECTIVES = [
   SIDEBAR_TOGGLE_DIRECTIVES
 ]
 
-// Import routing module
-import { AppRoutingModule } from './app.routing';
-
-// Import 3rd party components
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { TabsModule } from 'ngx-bootstrap/tabs';
-import { ChartsModule } from 'ng2-charts/ng2-charts';
-
 @NgModule({
   imports: [
     BrowserModule,
+    FormsModule,
+    HttpModule,
+    // RouterModule.forRoot(routes),
     AppRoutingModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
@@ -65,12 +63,24 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     AppComponent,
     ...APP_CONTAINERS,
     ...APP_COMPONENTS,
-    ...APP_DIRECTIVES
+    ...APP_DIRECTIVES,
+    LoginComponent,
+    RegisterComponent,
+    AccountsComponent,
+    AlertComponent,
+    UserComponent
   ],
   providers: [{
     provide: LocationStrategy,
-    useClass: HashLocationStrategy
-  }],
-  bootstrap: [ AppComponent ]
+    useClass: HashLocationStrategy,
+
+  },
+    AuthGuard,
+    AlertService,
+    AuthenticationService,
+    UserService,
+  ],
+  bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
