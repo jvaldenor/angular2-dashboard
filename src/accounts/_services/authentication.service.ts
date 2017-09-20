@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http, Response} from '@angular/http';
 import 'rxjs/add/operator/map'
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Injectable()
 export class AuthenticationService {
     authUrl = 'http://localhost:8080/uaa/oauth/token'
     public redirectUrl: string;
-    private loggedIn: boolean = false;
+    private loggedIn = false;
 
     constructor(private http: Http, private router: Router) {
     }
@@ -31,7 +31,7 @@ export class AuthenticationService {
             // login successful if there's a jwt token in the response
             const user = response.json();
             if (user && user.access_token) {
-                console.log("user is logged in");
+                console.log('user is logged in');
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('currentUser', JSON.stringify(user));
             }
