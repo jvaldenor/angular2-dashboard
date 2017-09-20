@@ -9,7 +9,7 @@ import {AppAside, AppBreadcrumbs, AppFooter, AppHeader, AppSidebar} from './comp
 // Import directives
 import {AsideToggleDirective, NAV_DROPDOWN_DIRECTIVES, SIDEBAR_TOGGLE_DIRECTIVES} from './directives';
 // Import routing module
-import {AppRoutingModule} from './app.routing';
+import {AppRoutingModule, routes} from './app.routing';
 // Import 3rd party components
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import {TabsModule} from 'ngx-bootstrap/tabs';
@@ -24,8 +24,9 @@ import {LoginComponent} from '../accounts/login/login.component';
 import {RegisterComponent} from '../accounts/register/register.component';
 import {AccountsComponent} from '../accounts/accounts.component';
 import {AlertComponent} from '../accounts/_directives/alert.component';
-import {UserComponent} from "../accounts/user/user.component";
-import {HashLocationStrategy, LocationStrategy} from "@angular/common";
+import {UserComponent} from '../accounts/user/user.component';
+import {LocationStrategy, PathLocationStrategy} from '@angular/common';
+import {RouterModule} from '@angular/router';
 
 const APP_CONTAINERS = [
   FullLayout,
@@ -53,7 +54,7 @@ const APP_DIRECTIVES = [
     BrowserModule,
     FormsModule,
     HttpModule,
-    // RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes),
     AppRoutingModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
@@ -70,9 +71,11 @@ const APP_DIRECTIVES = [
     AlertComponent,
     UserComponent
   ],
-  providers: [{
+  providers: [
+    {
     provide: LocationStrategy,
-    useClass: HashLocationStrategy,
+    // useClass: HashLocationStrategy,
+    useClass: PathLocationStrategy,
 
   },
     AuthGuard,

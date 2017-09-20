@@ -1,11 +1,7 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 // Import Containers
-import {
-  FullLayout,
-  SimpleLayout
-} from './containers';
+import {FullLayout, SimpleLayout} from './containers';
 import {AuthGuard} from '../accounts/_guards/auth.guard';
 import {LoginComponent} from '../accounts/login/login.component';
 import {RegisterComponent} from '../accounts/register/register.component';
@@ -19,13 +15,14 @@ export const routes: Routes = [
   // },
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  // otherwise redirect to home
-
-  {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
-  {path: '**', redirectTo: 'login'},
+  // // otherwise redirect to home
+  //
+  // {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+  // {path: '**', redirectTo: 'login'},
 
   {
     path: '',
+    // pathMatch: 'full',
     component: FullLayout,
     canActivate: [AuthGuard],
     data: {
@@ -34,7 +31,10 @@ export const routes: Routes = [
     children: [
       {
         path: 'dashboard',
+        // pathMatch: 'full',
         loadChildren: './views/dashboard/dashboard.module#DashboardModule'
+        // loadChildren: 'DashboardModule'
+
       },
       {
         path: 'components',
