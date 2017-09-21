@@ -24,9 +24,9 @@ import {LoginComponent} from '../accounts/login/login.component';
 import {RegisterComponent} from '../accounts/register/register.component';
 import {AccountsComponent} from '../accounts/accounts.component';
 import {AlertComponent} from '../accounts/_directives/alert.component';
-import {UserComponent} from '../accounts/user/user.component';
 import {LocationStrategy, PathLocationStrategy} from '@angular/common';
 import {RouterModule} from '@angular/router';
+import {UserModule} from '../accounts/user/user.module';
 
 const APP_CONTAINERS = [
   FullLayout,
@@ -58,7 +58,8 @@ const APP_DIRECTIVES = [
     AppRoutingModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    ChartsModule
+    ChartsModule,
+    UserModule
   ],
   declarations: [
     AppComponent,
@@ -69,7 +70,6 @@ const APP_DIRECTIVES = [
     RegisterComponent,
     AccountsComponent,
     AlertComponent,
-    UserComponent
   ],
   providers: [
     {

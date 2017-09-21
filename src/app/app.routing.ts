@@ -5,6 +5,7 @@ import {FullLayout, SimpleLayout} from './containers';
 import {AuthGuard} from '../accounts/_guards/auth.guard';
 import {LoginComponent} from '../accounts/login/login.component';
 import {RegisterComponent} from '../accounts/register/register.component';
+import {UserModule} from '../accounts/user/user.module';
 
 export const routes: Routes = [
   // {
@@ -41,6 +42,10 @@ export const routes: Routes = [
         loadChildren: './views/components/components.module#ComponentsModule'
       },
       {
+        path: 'user',
+        loadChildren: '../accounts/user/user.module#UserModule'
+      },
+      {
         path: 'icons',
         loadChildren: './views/icons/icons.module#IconsModule'
       },
@@ -54,23 +59,24 @@ export const routes: Routes = [
       }
     ]
   },
-  {
-    path: 'pages',
-    component: SimpleLayout,
-    data: {
-      title: 'Pages'
-    },
-    children: [
-      {
-        path: '',
-        loadChildren: './views/pages/pages.module#PagesModule',
-      }
-    ]
-  }
+  // {
+  //   path: 'pages',
+  //   component: SimpleLayout,
+  //   data: {
+  //     title: 'Pages'
+  //   },
+  //   children: [
+  //     {
+  //       path: '',
+  //       loadChildren: './views/pages/pages.module#PagesModule',
+  //     }
+  //   ]
+  // }
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule {
+}
