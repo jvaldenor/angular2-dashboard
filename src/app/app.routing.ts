@@ -6,6 +6,7 @@ import {AuthGuard} from '../accounts/_guards/auth.guard';
 import {LoginComponent} from '../accounts/login/login.component';
 import {RegisterComponent} from '../accounts/register/register.component';
 import {UserModule} from '../accounts/user/user.module';
+import {ViewUserComponent} from "../accounts/user/view-user/view-user.component";
 
 export const routes: Routes = [
   // {

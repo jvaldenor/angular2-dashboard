@@ -9,6 +9,8 @@ const routes: Routes = [
       title: 'User'
     },
     children: [
+      {path: '', redirectTo: 'view', pathMatch: 'full'},
+      // {path: '/', redirectTo: 'view', pathMatch: 'full'},
       {
         path: 'view',
         component: ViewUserComponent,
